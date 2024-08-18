@@ -2,10 +2,7 @@ package br.com.projeto.DailyDiet.model;
 
 
 import br.com.projeto.DailyDiet.dto.usuario.CadastroUsuarioDto;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,11 +16,17 @@ public class Usuario {
 
     @Id
     @GeneratedValue
+    @Column(name = "cd_id")
     private Long id;
+    @Column(name = "nm_nome")
     private String nome;
+    @Column(name = "email")
     private String email;
+    @Column(name = "senha")
     private String senha;
+    @Column(name = "telefone")
     private String telefone;
+    @Column(name = "cpf")
     private String cpf;
 
     public Usuario(CadastroUsuarioDto dto) {
