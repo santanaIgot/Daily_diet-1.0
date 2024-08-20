@@ -7,12 +7,22 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "TB_USUARIO_DIET" )
 @Getter@Setter
 @NoArgsConstructor
-public class Usuario {
+public class Usuario implements UserDetails {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Id
     @GeneratedValue
@@ -32,9 +42,26 @@ public class Usuario {
     public Usuario(CadastroUsuarioDto dto) {
         nome = dto.nome();
         email = dto.email();
-        senha = dto.senha();
+        senha = passwordEncoder.encode(dto.senha());
         telefone = dto.telefone();
         cpf = dto.cpf();
 
+    }
+
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public String getPassword() {
+        return this.senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
     }
 }
