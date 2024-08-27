@@ -24,11 +24,12 @@ public class UsuarioController {
     private PasswordEncoder passwordEncoder;
 
 
-    @Transactional
+
     @PostMapping("registrar")
+    @Transactional
     public ResponseEntity<DetalhesUsuarioDto> post(@RequestBody CadastroUsuarioDto dto,
                                                    UriComponentsBuilder uriBuilder) {
-        var usuario = new Usuario(dto);
+        var usuario = new Usuario(dto.login(), passwordEncoder.encode(dto.senha()));
         usuarioRepository.save(usuario);
         var uri = uriBuilder.path("/usuario/{id}").buildAndExpand(usuario.getId()).toUri();
 
