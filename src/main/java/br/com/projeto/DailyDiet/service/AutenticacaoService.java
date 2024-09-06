@@ -1,5 +1,4 @@
 package br.com.projeto.DailyDiet.service;
-
 import br.com.projeto.DailyDiet.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

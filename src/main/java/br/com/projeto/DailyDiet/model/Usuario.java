@@ -23,7 +23,7 @@ public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue
-    @Column(name = "cd_id")
+    @Column(name = "cd_id_usuario")
     private Long id;
     @Column(name = "nm_nome", nullable = false)
     private String login;
